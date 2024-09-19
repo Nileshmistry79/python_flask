@@ -19,6 +19,7 @@
     <th scope="col">Remaining</th>
     <th scope="col">LOI</th>
     <th scope="col">IR</th>
+    <th scope="col">CPI</th>
     <th scope="col"></th>
 </tr>
 {% for res in sdata.result %}
@@ -30,6 +31,7 @@
     <td>{{res['remainingN']}}</td>
     <td>{{res['LOI']}}</td>
     <td>{{res['IR']}}</td>
+    <td>{{res['CPI']}}</td>
 
     <td scope="col"><button type="submit" class="btn btn-primary" onclick='getredirect({{res["surveyId"]}})'>Redirects</button></td>
 
