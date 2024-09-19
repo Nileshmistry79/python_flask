@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template, request, flash, jsonify,redirect,url_for
 from flask_login import login_required, current_user
-from .models import Note
-from . import db
 import requests
 import json
 
@@ -39,6 +37,7 @@ def home():
     return render_template("home.html", user=current_user)
 
 @views.route('/getLiveSurvey',methods=['POST'])
+@login_required
 def getLiveSurvey():
     c_code=request.form.get('countryCode')
     l_code=request.form.get('languageCode')
