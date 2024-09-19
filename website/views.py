@@ -39,7 +39,6 @@ def home():
     return render_template("home.html", user=current_user)
 
 @views.route('/getLiveSurvey',methods=['POST'])
-@login_required
 def getLiveSurvey():
     c_code=request.form.get('countryCode')
     l_code=request.form.get('languageCode')
