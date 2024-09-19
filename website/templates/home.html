@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+<form method="POST" action="/getLiveSurvey">
+
+    <div class="form-group">
+    <label  >Country Code : </label>
+    <select id="countryCode" name="countryCode" class="form-control">
+            <option value="US">US</option>
+            <option value="IN">IN</option>
+    </select>
+    </div>
+  <br />
+
+    <div class="form-group">
+    <label  >Country Code : </label>
+    <select id="languageCode" name="languageCode" class="form-control">
+            <option value="EN">EN</option>
+    </select>
+    </div>
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Get Survey Details</button>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+{% endblock %}

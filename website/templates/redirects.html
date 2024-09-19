@@ -1,0 +1,91 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+{% if sdata.apiStatus == 'Failure' %}
+
+
+   <div class="alert alert-danger " role="alert">
+      {{sdata.msg}}
+   </div>
+
+
+
+
+{% else %}
+
+<h2>Survey ID : {{d_PID}}</h2>
+
+
+<table class="table table-striped">
+
+
+<tr>
+    <td>Survey Success Url</td>
+    <td>{{sdata.redirectURL['sUrl']}} </td>
+</tr>
+<tr>
+    <td>Termination Survey Url</td>
+    <td>{{sdata.redirectURL['tUrl']}} </td>
+</tr>
+<tr>
+    <td>Overquota Survey Url</td>
+    <td>{{sdata.redirectURL['oUrl']}} </td>
+</tr>
+
+
+</table>
+
+
+
+
+{% endif %}
+
+
+
+
+
+<h2>Update survey Redirects </h2>
+
+<form method="POST" action="/setredirect">
+
+    <div class="form-group">
+    <label  >SurveyID: </label>
+         <input type="text" class="form-control" name="d_PID" id="d_PID" value="{{d_PID}}" readonly />
+    </div>
+    <br/>
+
+    <div class="form-group">
+    <label  >Survey Success Url : </label>
+        <input type="text" class="form-control" name="sUrl" id="sUrl" />
+    </div>
+     <br />
+
+     <div class="form-group">
+    <label  >Fail Survey Url : </label>
+        <input type="text" class="form-control" name="fUrl" id="fUrl" />
+    </div>
+     <br />
+
+
+    <div class="form-group">
+    <label  >Termination Survey Url : </label>
+        <input type="text" class="form-control" name="tUrl" id="tUrl" />
+    </div>
+     <br />
+
+        <div class="form-group">
+    <label  >Overquota Survey Url : </label>
+        <input       class="form-control"   type="text" name="oUrl" id="oUrl" />
+    </div>
+     <br />
+
+
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Set Redirect</button>
+  </div>
+</form>
+
+
+
+
+{% endblock %}

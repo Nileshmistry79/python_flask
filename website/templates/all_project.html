@@ -1,0 +1,69 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+{% if sdata.apiStatus == 'Failure' %}
+
+{{sdata.msg}}
+
+
+{% else %}
+
+{{sdata.apiStatus}}
+
+<table class="table table-striped">
+<tr>
+    <th scope="col">surveyId </th>
+    <th scope="col">surveyName</th>
+    <th scope="col">N</th>
+    <th scope="col">Complete</th>
+    <th scope="col">Remaining</th>
+    <th scope="col">LOI</th>
+    <th scope="col">IR</th>
+    <th scope="col"></th>
+</tr>
+{% for res in sdata.result %}
+<tr>
+    <td><a href="/getdetails?pid={{res['surveyId']}}" >{{res['surveyId']}}</a> </td>
+    <td>{{res['surveyName']}}</td>
+    <td>{{res['N']}}</td>
+    <td>{{res['supCmps']}}</td>
+    <td>{{res['remainingN']}}</td>
+    <td>{{res['LOI']}}</td>
+    <td>{{res['IR']}}</td>
+
+    <td scope="col"><button type="submit" class="btn btn-primary" onclick='getredirect({{res["surveyId"]}})'>Redirects</button></td>
+
+</tr>
+
+{%endfor%}
+</table>
+
+
+
+
+{% endif %}
+
+
+
+{% block javascript %}
+    <script type="text/javascript">
+      function surveydetails(PID) {
+        window.location.href = "/getdetails?pid="+PID;
+      }
+      function getredirect(PID) {
+        window.location.href = "/getredirect?pid="+PID;
+      }
+      function setredirect(PID) {
+        window.location.href = "/setredirect?pid="+PID;
+      }
+
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+{% endblock %}

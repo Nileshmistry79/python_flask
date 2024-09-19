@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+{% if sdata.apiStatus == 'Failure' %}
+
+
+   <div class="alert alert-danger " role="alert">
+      {{sdata.msg}}
+   </div>
+
+
+
+
+{% else %}
+
+{{sdata.msg}}
+
+<table class="table table-striped">
+<tr>
+    <th scope="col">Attribute </th>
+    <th scope="col">Value</th>
+</tr>
+
+
+{% for res,value in sdata.result[0].items() %}
+<tr>
+    <td>{{res}}</td>
+    <td>{{value}}</td>
+</tr>
+{%endfor%}
+</table>
+
+
+
+
+{% endif %}
+
+
+
+{% block javascript %}
+    <script type="text/javascript">
+      function surveydetails(PID) {
+        window.location.href = "/getdetails/"+PID;
+      }
+      function getredirect(PID) {
+        window.location.href = "/getredirect/"+PID;
+      }
+      function setredirect(PID) {
+        window.location.href = "/setredirect/"+PID;
+      }
+
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+{% endblock %}
