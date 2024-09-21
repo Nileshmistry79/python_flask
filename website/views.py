@@ -105,23 +105,23 @@ def setredirect():
             flash('Please provide valid URL for Termination.', category='error')
         elif len(oUrl)<2:
             flash('Please provide valid URL for overQuota.', category='error')
+        else :
+            url = BASE_URL + 'setRedirectionForSurvey/' + pid
+            mydata = {}
+            mydata['sUrl'] =sUrl
+            mydata['fUrl'] =fUrl
+            mydata['oUrl'] =oUrl
+            mydata['tUrl'] =tUrl
+            session.headers['Content-Type'] = "application/json"
+            session.headers['Accept'] = "application/json"
 
-        url = BASE_URL + 'setRedirectionForSurvey/' + pid
-        mydata = {}
-        mydata['sUrl'] =sUrl
-        mydata['fUrl'] =fUrl
-        mydata['oUrl'] =oUrl
-        mydata['tUrl'] =tUrl
-        session.headers['Content-Type'] = "application/json"
-        session.headers['Accept'] = "application/json"
-
-        response = session.put(url, json=mydata)
-        data = json.loads(response.content.decode('UTF-8'))
-        if response.status_code == 200:
-            flash('Redirect URL were Set correctly', category='success')
-        else:
-            f_error=f'Failure in updating the recirects \n Error={data}'
-            flash(f_error,category='alert')
+            response = session.put(url, json=mydata)
+            data = json.loads(response.content.decode('UTF-8'))
+            if response.status_code == 200:
+                flash('Redirect URL were Set correctly', category='success')
+            else:
+                f_error=f'Failure in updating the recirects \n Error={data}'
+                flash(f_error,category='alert')
 
         return redirect(url_for('views.getredirect',pid=pid))
 

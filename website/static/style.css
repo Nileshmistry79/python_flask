@@ -1,0 +1,40 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+
+.navbar {
+  overflow: hidden;
+  background-color: #ff7657 !important;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+
+.navfont{
+color : #000  /* #ff7657 */
+}
+
+
+.btn-color{
+  background-color: #ff7657 !important;
+  color : #000;  /* #ff7657 */
+
+}
+
+
+#m_update_redirect {
+    display: none;
+}
+
+.float-child {
+    float: left;
+}
+
+
+h2,h4 {
+color : #ff7657;
+}

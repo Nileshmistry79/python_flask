@@ -8,7 +8,8 @@
 
 {% else %}
 
-{{sdata.apiStatus}}
+<h2>All Live Surveys</h2>
+
 
 <table class="table table-striped">
 <tr>
@@ -33,14 +34,14 @@
     <td>{{res['IR']}}</td>
     <td>{{res['CPI']}}</td>
 
-    <td scope="col"><button type="submit" class="btn btn-primary" onclick='getredirect({{res["surveyId"]}})'>Redirects</button></td>
+    <td scope="col"><button type="submit" class="btn btn-primary btn-color" onclick='getredirect({{res["surveyId"]}})'>Redirects</button></td>
 
 </tr>
 
 {%endfor%}
 </table>
 
-
+</div>
 
 
 {% endif %}
