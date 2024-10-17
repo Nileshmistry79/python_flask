@@ -149,7 +149,7 @@ def getTransactionData():
     if len(s_date) < 2:
         flash('Invalid Start Date.', category='error')
     elif len(e_date) < 2:
-        flash('Invalid Start Date.', category='error')
+        flash('Invalid End Date.', category='error')
     else:
         print(e_date)
         print(type(s_date))
