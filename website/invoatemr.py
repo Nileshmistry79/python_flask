@@ -2,8 +2,10 @@ from flask import Blueprint, render_template, request, flash, jsonify,redirect,u
 from flask_login import login_required, current_user
 import requests
 import json
+from datetime import datetime
 
-views = Blueprint('views', __name__)
+
+invoatemr = Blueprint('invoatemr', __name__,url_prefix='/invoatemr')
 
 S_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YmNiZTg5MTlhOGQ2ODZhZTEwYWI2NSIsInVzcl9pZCI6NTkyOCwidXNyX3R5cGUiOiJzdXBwbGllciIsImlhdCI6MTcyMzY0NTU3N30.GtwamU5UQO3vD7OBGIrImhLRB7k1aOJ2w4UBjava3wk'
 S_BASE_URL='https://stagediysamplingapi.innovatesample.com/api/v2/supply/'
@@ -29,14 +31,21 @@ session.headers['x-access-token'] = API_KEY
 session.headers['Accept'] = "application/json"
 
 
-
-@views.route('/', methods=['GET'])
+@invoatemr.route('/', methods=['GET'])
 @login_required
 def home():
     response_data=1
+    return render_template("base.html", user=current_user)
+
+
+
+@invoatemr.route('/home', methods=['GET'])
+@login_required
+def main_home():
+    response_data=1
     return render_template("home.html", user=current_user)
 
-@views.route('/getLiveSurvey',methods=['POST'])
+@invoatemr.route('/getLiveSurvey',methods=['POST'])
 @login_required
 def getLiveSurvey():
     c_code=request.form.get('countryCode')
@@ -64,7 +73,7 @@ def getLiveSurvey():
 
 
 
-@views.route('/getdetails',methods=['GET'])
+@invoatemr.route('/getdetails',methods=['GET'])
 @login_required
 def getdetails():
     PID = request.args.get("pid")  #
@@ -74,7 +83,7 @@ def getdetails():
     return render_template("project.html", user=current_user, sdata=data)
 
 
-@views.route('/getredirect',methods=['GET'])
+@invoatemr.route('/getredirect',methods=['GET'])
 @login_required
 def getredirect():
     PID = request.args.get("pid")  #
@@ -85,7 +94,7 @@ def getredirect():
 
 
 
-@views.route('/setredirect',methods=['POST'])
+@invoatemr.route('/setredirect',methods=['POST'])
 @login_required
 def setredirect():
     if request.method == 'POST':
@@ -120,8 +129,34 @@ def setredirect():
             if response.status_code == 200:
                 flash('Redirect URL were Set correctly', category='success')
             else:
-                f_error=f'Failure in updating the recirects \n Error={data}'
+                f_error=f'Failure in updating the redirects \n Error={data}'
                 flash(f_error,category='alert')
 
-        return redirect(url_for('views.getredirect',pid=pid))
+        return redirect(url_for('invoatemr.getredirect',pid=pid))
 
+
+
+
+
+
+@invoatemr.route('/getTransactionData',methods=['POST'])
+@login_required
+def getTransactionData():
+    s_date=request.form.get('startDate')
+    e_date=request.form.get('endDate')
+    url = BASE_URL+'getSurveyTransactionsByDateRange'
+    today_date= datetime.now()
+    if len(s_date) < 2:
+        flash('Invalid Start Date.', category='error')
+    elif len(e_date) < 2:
+        flash('Invalid Start Date.', category='error')
+    else:
+        print(e_date)
+        print(type(s_date))
+        session.params['endDate'] = e_date
+        session.params['startDate'] = s_date
+        response = session.get(url)
+        data = json.loads(response.content.decode('UTF-8'))
+        return render_template("all_panel.html", user=current_user, sdata=data,params=session.params)
+
+    return redirect(url_for('invoatemr.main_home'))

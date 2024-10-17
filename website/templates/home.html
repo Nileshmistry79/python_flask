@@ -1,7 +1,8 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
 
-<form method="POST" action="/getLiveSurvey">
+  <form action="{{ url_for('invoatemr.getLiveSurvey') }}" method="POST">
+
 
     <div class="form-group">
     <label  >Country Code : </label>
@@ -23,8 +24,22 @@
   </div>
 </form>
 
+<br/>
+
+<hr>
+
+  <form action="{{ url_for('invoatemr.getTransactionData') }}" method="POST">
 
 
+    <div class="form-group">
+         <label >StartDate:</label>
+         <input type="date" id="startDate" name="startDate">
+         <label >endDate:</label>
+         <input type="date" id="endDate" name="endDate">
+          <button type="submit" class="btn btn-primary btn-color">Get My Panelist Detail</button>
+   </div>
+
+   </form>
 
 
 

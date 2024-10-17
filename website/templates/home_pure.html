@@ -9,7 +9,7 @@
 {% else %}
 
 <h2>All Live Surveys</h2>
-
+{{sdata.msg}}
 
 <table class="table table-striped">
 <tr>
@@ -23,16 +23,16 @@
     <th scope="col">CPI</th>
     <th scope="col"></th>
 </tr>
-{% for res in sdata.result %}
+{% for res in sdata.surveys %}
 <tr>
-    <td><a href="/invoatemr/getdetails?pid={{res['surveyId']}}" >{{res['surveyId']}}</a> </td>
-    <td>{{res['surveyName']}}</td>
-    <td>{{res['N']}}</td>
-    <td>{{res['supCmps']}}</td>
-    <td>{{res['remainingN']}}</td>
-    <td>{{res['LOI']}}</td>
-    <td>{{res['IR']}}</td>
-    <td>{{res['CPI']}}</td>
+    <td><a href="#" >{{res['survey_id']}}</a> </td>
+    <td>{{res['survey_name']}}</td>
+    <td>{{res['supplier_completes']['needed']}}</td>
+    <td>{{res['supplier_completes']['achieved']}}</td>
+    <td>{{res['supplier_completes']['remaining']}}</td>
+    <td>{{res['survey_performance']['overall']['loi']}}</td>
+    <td>{{res['survey_performance']['overall']['ir']}}</td>
+    <td>{{res['cpi']}}</td>
 
     <td scope="col"><button type="submit" class="btn btn-primary btn-color" onclick='getredirect({{res["surveyId"]}})'>Redirects</button></td>
 

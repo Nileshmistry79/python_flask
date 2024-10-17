@@ -22,7 +22,7 @@
   >
 
     <script type="text/javascript">
-      function show_hide() {
+      function    show_hide() {
         var x = document.getElementById("m_update_redirect");
           if (x.style.display === "none") {
             x.style.display = "block";
@@ -53,6 +53,8 @@
           {% if user.is_authenticated %}
           <a class="nav-item nav-link navfont" id="home" href="/">Home</a>
           <a class="nav-item nav-link navfont" id="logout" href="/logout">Logout</a>
+          <a class="nav-item nav-link navfont" id="InovateMR" href="/invoatemr/home">InovateMR</a>
+          <a class="nav-item nav-link navfont" id="PureSpec" href="/purespec/home">Pure Spectrum </a>
           {% else %}
           <a class="nav-item nav-link navfont" id="login" href="/login">Login</a>
           <a class="nav-item nav-link navfont" id="signUp" href="/sign-up">Sign Up</a>
