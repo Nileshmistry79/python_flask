@@ -22,6 +22,7 @@
     <th scope="col">IR</th>
     <th scope="col">CPI</th>
     <th scope="col"></th>
+    <th scope="col"></th>
 </tr>
 {% for res in sdata.result %}
 <tr>
@@ -35,6 +36,7 @@
     <td>{{res['CPI']}}</td>
 
     <td scope="col"><button type="submit" class="btn btn-primary btn-color" onclick='getredirect({{res["surveyId"]}})'>Redirects</button></td>
+    <td scope="col"><button type="submit" class="btn btn-primary btn-color" onclick='getSurveyTarget({{res["surveyId"]}})'>Target-Group</button></td>
 
 </tr>
 
@@ -58,6 +60,9 @@
       }
       function setredirect(PID) {
         window.location.href = "/invoatemr/setredirect?pid="+PID;
+      }
+      function getSurveyTarget(PID) {
+        window.location.href = "/invoatemr/getSurveyTarget?pid="+PID;
       }
 
 </script>

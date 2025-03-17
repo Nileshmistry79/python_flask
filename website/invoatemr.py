@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 
 
+
 invoatemr = Blueprint('invoatemr', __name__,url_prefix='/invoatemr')
 
 S_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YmNiZTg5MTlhOGQ2ODZhZTEwYWI2NSIsInVzcl9pZCI6NTkyOCwidXNyX3R5cGUiOiJzdXBwbGllciIsImlhdCI6MTcyMzY0NTU3N30.GtwamU5UQO3vD7OBGIrImhLRB7k1aOJ2w4UBjava3wk'
@@ -91,6 +92,20 @@ def getredirect():
     response = session.get(url)
     data = json.loads(response.content.decode('UTF-8'))
     return render_template("redirects.html", user=current_user, sdata=data,d_PID=PID)
+
+
+
+
+@invoatemr.route('/getSurveyTarget',methods=['GET'])
+@login_required
+def getSurveyTarget():
+    PID = request.args.get("pid")  #
+    url = BASE_URL+'getSurveyTargeting/'+PID
+    response = session.get(url)
+    data = json.loads(response.content.decode('UTF-8'))
+    return render_template("survey_details.html", user=current_user, sdata=data,d_PID=PID)
+
+
 
 
 

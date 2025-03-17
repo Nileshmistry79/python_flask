@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+{% if sdata.apiStatus == 'Failure' %}
+
+
+   <div class="alert alert-danger " role="alert">
+      {{sdata.msg}}
+   </div>
+
+
+
+
+{% else %}
+
+<h2>Survey ID : {{d_PID}}</h2>
+
+
+
+
+<table class="table table-striped">
+<tr>
+    <th scope="col">QuestionId </th>
+    <th scope="col">QuestionKey</th>
+    <th scope="col">QuestionText</th>
+    <th scope="col">QuestionType</th>
+    <th scope="col">QuestionCategory</th>
+    <th scope="col">Valid Value</th>
+</tr>
+{% for res in sdata.result %}
+<tr>
+    <td>{{res['QuestionId']}}</td>
+    <td>{{res['QuestionKey']}}</td>
+    <td>{{res['QuestionText']}}</td>
+    <td>{{res['QuestionType']}}</td>
+    <td>{{res['QuestionCategory']}}</td>
+
+    <td>
+    {% for val in res.Options %}
+       {% for key in val.keys() %} {% if key != 'OptionId' %} {{val[key]}} {% endif %} {%endfor%}
+    {%endfor%}
+    </td>
+</tr>
+
+{%endfor%}
+</table>
+
+
+
+{% endif %}
+
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block javascript %}
+    <script type="text/javascript">
+      function trimSpace(text) {
+        return text.trim()
+      }
+
+
+</script>
+{% endblock %}
+
+
